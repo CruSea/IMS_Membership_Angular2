@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h5> <i class="fa fa-align-justify"></i> Contact Lists</h5>
+        <button type="button" class="btn btn-info pull-right " data-toggle="modal" (click)="infoModal.show()">
+           Add Contact
+        </button>
+        
+        
+      </div>
+    
+     <div class="card-body">
+        <table class="table table-bordered table-striped table-sm ">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Email Adress</th>
+              <th>Sex</th>
+              <th>Location</th>
+              <th>Note</th>
+              <th>Created On</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contact of contacts">
+                <td>{{contact.id}}</td>
+              <td>{{contact.fullname}}</td>
+              <td>{{contact.phonenumber}}</td>
+              <td>{{contact.email}}</td>
+              <td>{{contact.sex}}</td>
+              <td>{{contact.location}}</td>
+              <td>{{contact.note}}</td>
+              <td>{{contact.created_at}}</td>
+              <td>
+                <span class="badge badge-info">Edit Info</span>
+              </td>
+            </tr>
+           
+          </tbody>
+        </table>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+
+
+
+
+<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Contact</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+ 
+
+
+ <div class="col-sm-12">
+       <div class="card">
+           <!-- <div class="card-header">
+                    <strong>ADD</strong>
+                    <small>Contact</small>
+                  </div> -->
+    <div class="card-body">
+          <form  (ngSubmit)="onSubmit()" >
+                    <div class="form-group">
+                      <label for="fullname">Full Name</label>
+                      <input type="text" class="form-control" id="fullname" placeholder="Enter your full name" [(ngModel)]="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="phonenumber">Phon Number</label>
+                      <input type="text" class="form-control" id="phonenumber" placeholder="enter your cell phone number" [(ngModel)]="phonenumber" name="phonenumber" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email Adress</label>
+                      <input type="text" class="form-control" id="email" placeholder="Enter email adress name" [(ngModel)]="email" name="email" required>
+                    </div>
+                   
+
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select class="form-control" id="sex" [(ngModel)]="sex" name="sex">
+                          <option>Male</option>
+                          <option>Female</option>
+                         
+                        </select>
+                      </div>
+                      <div class="form-group ">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter your city" [(ngModel)]="location" name="location">
+                      </div>
+                      <div class="form-group">
+                        <label for="note">Note</label>
+                        <input type="text" class="form-control" id="note" placeholder="note here"[(ngModel)]="note" name="note">
+                      </div>
+                      <div class="form-group">
+                          <label  for="discription">Discription</label>
+                          <textarea id="discription" name="discription" rows="3" class="form-control" placeholder="Content.." [(ngModel)]="discription" name="discription"></textarea>
+                     </div>
+                     <button type="submit" class="btn btn-primary">ADD</button>
+                    </form>
+                    <!-- <form  (ngSubmit)="onSubmit()">
+                      
+                              <label>Username:</label>
+                              <input type="text" class="form-control"   [(ngModel)]="fullname" name="fullname"  required />
+                      
+                              <label>Contraseña:</label>
+                              <input type="text" class="form-control"  [(ngModel)]="email" name="email"  required />
+                      
+                      
+                          <input type="submit" value="Entrar" class="btn btn-primary"/>
+                      
+                      </form> -->
+                   
+             </div>
+      </div>
+  </div><!--/.col-->
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
+          <button type="button" class="btn btn-info">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+  
