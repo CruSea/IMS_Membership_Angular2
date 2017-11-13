@@ -1,0 +1,87 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>  Contact Groups
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Region</th>
+              <th>Created_at</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let group of  groupContactlist">
+              <td>{{group.contact.id}}</td>
+              <td>{{group.contact.firstname}}</td>
+              <td>{{group.contact.mobilenumber}}</td>
+              <td>{{group.contact.region}}</td>
+              <td>{{group.contact.created_at}}</td>
+
+              <td>
+                <a (click)="removeFromgroup()"><span class="badge badge-success">Remove</span></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Add Contact To Group
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Full Nmae</th>
+              <th>Phone Number</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let contact of  contacts">
+              <td>{{contact.firstname}}</td>
+              <td>{{contact.mobilenumber}}</td>
+              <td>
+                <a (click)="addTogroup(contact)"><span class="badge badge-success">Add To Group</span></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>
