@@ -1,11 +1,22 @@
 export interface Contact{
     id:number;
-    fullname:string;
-    phonenumber:string;
-    email:string;
+    firstname:string;
+    middlename:string;
+    lastname:string;
     sex:string;
-    location:string;
-    note:string;
-    created_at:number;
+    age:number;
+    region:string;
+    wereda:string;
+    kebele:number;
+   housenumber:number;
+   officenumber:number;
+    mobilenumber:number;
+    resnumber:number;
+    pobox:number;
+    synod:string;
+    cong:string;
+    occupation:string
+    email:string;
+
     
 }

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ContactGroupComponent } from './contact-group.component';
 import { ContactListComponent } from './contact-list.component';
-
+import { ContactDetailComponent } from './contact-detail.component';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
       title: 'Contacts'
     },
     children: [
-      
+
       {
         path: 'contact-list',
         component: ContactListComponent,
@@ -26,6 +26,13 @@ const routes: Routes = [
         component: ContactGroupComponent,
         data: {
           title: 'Contact-group'
+        }
+      },
+      {
+        path: 'contact-detail',
+        component: ContactDetailComponent,
+        data: {
+          title: 'Contact-detail'
         }
       }
     ]

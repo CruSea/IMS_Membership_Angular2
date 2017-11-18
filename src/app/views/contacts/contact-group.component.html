@@ -1,11 +1,15 @@
 <!--/.col-->
+
 <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <i class="fa fa-align-justify"></i> Contact Group
+        <h5><i class="fa fa-align-justify"></i> Contact Group</h5>
+        <button type="button" class="btn btn-info pull-right " data-toggle="modal" (click)="infoModal.show()">
+          Create New Group
+        </button>
       </div>
       <div class="card-body">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover table-condensed table-sm">
           <thead>
             <tr>
               <th>#</th>
@@ -16,17 +20,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>DS Group</td>
-              <td>MKSE</td>
-              <td>2012/01/01</td>
+            <tr *ngFor="let group of groups">
+              <td>{{group.id}}</td>
+              <td>{{group.groupname}}</td>
+              <td>{{group.discription}}</td>
+              <td>{{group.created_at}}</td>
               <td>
                 <span class="badge badge-danger">Remove</span>
-                <span class="badge badge-secondary">Detail</span>
+         <a routerLinkActive="active"  (click)="onDetail(group.id)" [routerLink]="['/contacts/contact-detail']"><span class="badge badge-primary">Detail</span></a>
               </td>
             </tr>
-            
+
           </tbody>
         </table>
         <ul class="pagination">
@@ -42,4 +46,64 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <strong>ADD</strong>
+                <small>Contact</small>
+              </div>
+              <div class="card-body">
+                <form  (ngSubmit)="onSubmit(g)" #g="ngForm" >
+                  <div class="form-group">
+                    <label for="groupname">Group Name</label>
+                    <input type="text" class="form-control" id="groupname" placeholder="Enter  group name" [(ngModel)]="groupname" name="groupname" >
+                  </div>
+
+                  <div class="form-group">
+                      <label  for="discription">Discription</label>
+                      <textarea id="discription" name="discription" rows="3" class="form-control" placeholder="Content.." [(ngModel)]="discription" name="discription"></textarea>
+                 </div>
+                  <button type="submit" class="btn btn-primary">Create Group</button>
+                </form>
+
+
+              </div>
+            </div>
+          </div><!--/.col-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
+          <button type="button" class="btn btn-info">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
   <!--/.col-->
