@@ -9,7 +9,7 @@ import { ContactDetailComponent } from './contact-detail.component';
 import { ContactsRoutingModule } from './contacts-routing.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { SweetAlertService } from 'ng2-sweetalert2';
+
 
 import { ContactService } from 'app/contact.service';
 import { ContactGroupService } from 'app/contact-group.service';
@@ -32,6 +32,6 @@ import { FilterPipe } from './filter.pipe';
     // PopupModule.forRoot()
   ],
   declarations: [ContactListComponent, ContactGroupComponent, ContactDetailComponent, FilterPipe ],
-  providers:[ContactService, ContactGroupService , ContactDetailService, SweetAlertService]
+  providers:[ContactService, ContactGroupService , ContactDetailService]
 })
 export class ContactsModule { }

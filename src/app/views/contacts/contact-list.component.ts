@@ -4,7 +4,7 @@ import { Contact } from 'app/contact.interface';
 import { ContactService } from 'app/contact.service';
 import { Response } from '@angular/http';
 import { ContactObject } from './contact.object';
-import { SweetAlertService } from 'ng2-sweetalert2';
+
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -15,7 +15,7 @@ import { SweetAlertService } from 'ng2-sweetalert2';
   `]
 })
 export class ContactListComponent implements OnInit {
-  
+
   contacts: any;
    contactnew = new ContactObject;
           constructor(private contactservice: ContactService){ }
