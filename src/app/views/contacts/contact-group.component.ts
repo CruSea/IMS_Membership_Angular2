@@ -1,6 +1,6 @@
 import { Component,  OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { ContactGroupService } from 'app/contact-group.service';
+import { NgForm } from '@angular/forms';
 import { Group } from 'app/group.interface';
 import { Response } from '@angular/http';
 import { GroupObject } from './group.object';
@@ -33,15 +33,12 @@ export class ContactGroupComponent implements OnInit {
        // console.log( this.groupnew.id);
      }
 
-  // ondelete() {
-  //
-  //   this.contactgroupservice.deleteGroup(this.groupnew).subscribe(
-  //     () => {
-  //       alert('Contact Deleted!')}
-  //
-  //
-  //   );
-  // }
+  ondelete(id: number) {
+    this.groupnew.id = id;
+
+    this.contactgroupservice.deleteGroup(this.groupnew.id).subscribe(
+      () => { alert('Contact Deleted!')} );
+  }
 // refresh after method excution
     onrefresh(){
             this.contactgroupservice.getGroup().subscribe(

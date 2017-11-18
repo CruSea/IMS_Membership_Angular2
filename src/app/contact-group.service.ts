@@ -21,9 +21,9 @@ public myid: Group;
             )
                      }
 
-  // deleteGroup(id: number) {
-  //   return this.http.delete('http://localhost/testapp/public/api/Contact-group/' + id);
-  // }
+  deleteGroup(id: number) {
+    return this.http.delete('http://localhost/testapp/public/api/Contact-group/' + id);
+                        }
   // pushingId(group: Group) {
   //      this.pushedgroup.emit(group);
   // }

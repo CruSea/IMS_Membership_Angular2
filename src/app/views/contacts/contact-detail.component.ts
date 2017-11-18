@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from 'app/contact.interface';
 import { ContactObject } from './contact.object';
 import { ContactService } from 'app/contact.service';
@@ -17,7 +17,7 @@ export class ContactDetailComponent implements OnInit {
 //   groups: Group[];
   contactnew = new ContactObject;
   // groupContactlist = new GroupObject;
-  groupContactlist: any;
+  @Input() groupContactlist: any;
   constructor( private contactservice: ContactService, private contactdetailservice: ContactDetailService, private contactgroupservice: ContactGroupService){}
 
   ngOnInit() {
@@ -41,10 +41,12 @@ export class ContactDetailComponent implements OnInit {
     const group_add_id = JSON.parse(localStorage.getItem('current_group_id' ));
                 group_id = group_add_id;
                 contact_id = this.contactnew.id;
-               console.log(group_id);
-               console.log(contact_id);
     this.contactdetailservice.postTogroup(group_id, contact_id).subscribe(
       () => alert('Contact Added To Group! ') );
   }
+  removeFromgroup(contact_id: number){
+          this.contactdetailservice.removeComtact(contact_id).subscribe(
+            () => alert('Contact Removed from group!!!') );
+   }
 
 }

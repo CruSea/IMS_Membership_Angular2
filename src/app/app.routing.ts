@@ -28,6 +28,10 @@ export const routes: Routes = [
         path: 'contacts',
         loadChildren: './views/contacts/contacts.module#ContactsModule'
       },
+      {
+        path: 'settings',
+        loadChildren: './views/settings/settings.module#SettingsModule'
+      }
     ]
   }
 ];

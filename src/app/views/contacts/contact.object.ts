@@ -17,6 +17,7 @@ export class ContactObject {
   public occupation: string
   public email: string;
   public id: number;
+  public name: any;
      constructor() {
 
 

@@ -16,4 +16,8 @@ export class ContactDetailService {
         getGroup(group_id: number){
                   return this.http.get<Group>('http://localhost/testapp/public/api/Contact-detail/' + group_id)
                    }
+// remove contact from group
+        removeComtact(contact_id: number) {
+          return this.http.delete('http://localhost/testapp/public/api/Contact-detail/' + contact_id)
+        }
 }

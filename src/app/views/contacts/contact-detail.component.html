@@ -18,15 +18,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let group of  groupContactlist">
-              <td>{{group.contact.id}}</td>
+            <tr *ngFor="let group of  groupContactlist; let i = index; ">
+              <td>{{ i + 1}}</td>
               <td>{{group.contact.firstname}}</td>
               <td>{{group.contact.mobilenumber}}</td>
               <td>{{group.contact.region}}</td>
               <td>{{group.contact.created_at}}</td>
 
               <td>
-                <a (click)="removeFromgroup()"><span class="badge badge-success">Remove</span></a>
+                <a (click)="removeFromgroup(group.contact.id)"><span class="badge badge-success">Remove</span></a>
               </td>
             </tr>
             </tbody>

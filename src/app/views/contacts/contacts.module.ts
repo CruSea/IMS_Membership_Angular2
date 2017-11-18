@@ -9,7 +9,7 @@ import { ContactDetailComponent } from './contact-detail.component';
 import { ContactsRoutingModule } from './contacts-routing.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-// import {PopupModule} from 'ng2-opd-popup';
+import { SweetAlertService } from 'ng2-sweetalert2';
 
 import { ContactService } from 'app/contact.service';
 import { ContactGroupService } from 'app/contact-group.service';
@@ -17,6 +17,7 @@ import { ContactDetailService } from 'app/contact-detail.service';
 import { FormsModule } from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
+import { FilterPipe } from './filter.pipe';
 
 
 
@@ -30,7 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     // PopupModule.forRoot()
   ],
-  declarations: [ContactListComponent, ContactGroupComponent, ContactDetailComponent ],
-  providers:[ContactService, ContactGroupService , ContactDetailService]
+  declarations: [ContactListComponent, ContactGroupComponent, ContactDetailComponent, FilterPipe ],
+  providers:[ContactService, ContactGroupService , ContactDetailService, SweetAlertService]
 })
 export class ContactsModule { }
