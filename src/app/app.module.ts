@@ -59,10 +59,15 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {AuthGuard} from "./views/auth.guard";
+import {AuthService} from "./views/auth.service";
+import {HttpService} from "./views/http.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -77,8 +82,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+    useClass: HashLocationStrategy,
+
+  }, AuthGuard , AuthService, HttpService , HttpClientModule],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

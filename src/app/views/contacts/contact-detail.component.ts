@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Contact } from 'app/contact.interface';
+import { Contact } from 'app/views/contacts/contact.interface';
 import { ContactObject } from './contact.object';
-import { ContactService } from 'app/contact.service';
-import { Group } from 'app/group.interface';
+import { ContactService } from 'app/views/contacts/services/contact.service';
+import { Group } from 'app/views/contacts/group.interface';
 import { GroupObject } from './group.object';
-import { ContactGroupService } from 'app/contact-group.service';
-import { ContactDetailService } from 'app/contact-detail.service';
+import { ContactGroupService } from 'app/views/contacts/services/contact-group.service';
+import { ContactDetailService } from 'app/views/contacts/services/contact-detail.service';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-contact-detail',
@@ -18,15 +19,16 @@ export class ContactDetailComponent implements OnInit {
   contactnew = new ContactObject;
   // groupContactlist = new GroupObject;
   @Input() groupContactlist: any;
-  constructor( private contactservice: ContactService, private contactdetailservice: ContactDetailService, private contactgroupservice: ContactGroupService){}
+  constructor( private contactservice: ContactService, private contactdetailservice: ContactDetailService ){}
 
   ngOnInit() {
 // Get contacts on page load
+
                 this.contactservice.getContact().subscribe(
                 contact => {this.contacts = contact['contacts'];},
                 (error: Response ) => console.log(error) );
 // Get groups on page load
-          const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
+              const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
                   this.contactdetailservice.getGroup(group_list_id).subscribe(
                   group => {this.groupContactlist = group['groupmembers']; },
                   (error: Response ) => console.log(error) );

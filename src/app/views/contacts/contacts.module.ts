@@ -11,13 +11,15 @@ import { ContactsRoutingModule } from './contacts-routing.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 
-import { ContactService } from 'app/contact.service';
-import { ContactGroupService } from 'app/contact-group.service';
-import { ContactDetailService } from 'app/contact-detail.service';
+import { ContactService } from 'app/views/contacts/services/contact.service';
+import { ContactGroupService } from 'app/views/contacts/services/contact-group.service';
+import { ContactDetailService } from 'app/views/contacts/services/contact-detail.service';
 import { FormsModule } from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
 import { FilterPipe } from './filter.pipe';
+import {AuthService} from '../auth.service';
+import {HttpService} from '../http.service';
 
 
 
@@ -32,6 +34,6 @@ import { FilterPipe } from './filter.pipe';
     // PopupModule.forRoot()
   ],
   declarations: [ContactListComponent, ContactGroupComponent, ContactDetailComponent, FilterPipe ],
-  providers:[ContactService, ContactGroupService , ContactDetailService]
+  providers:[ContactService, ContactGroupService , ContactDetailService , AuthService, HttpService]
 })
 export class ContactsModule { }

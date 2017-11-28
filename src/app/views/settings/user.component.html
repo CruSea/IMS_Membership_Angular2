@@ -1,13 +1,9 @@
-<div class="animated fadein">
-  <!-- Table content wrapper-->
+<div class="animated fadeIn">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-          <h5> <i class="fa fa-align-justify"></i> Registered Users</h5>
-          <button type="button" class="btn btn-info pull-right " data-toggle="modal" (click)="infoModal.show()">
-            Add Contact
-          </button>
+          <i class="fa fa-align-justify"></i>  Registered Users
         </div>
         <div class="card-body">
           <!-- Contact List table-->
@@ -24,22 +20,16 @@
             </thead>
             <tbody>
             <tr>
-            <!--<tr *ngFor="let user of users; let i = index ;">-->
-              <!--<td>{{i +1 }}</td>-->
-              <!--<td>{{user.fullname}} </td>-->
-              <!--<td>{{user.username}}</td>-->
-              <!--<td>{{user.accountstatus}}</td>-->
-              <!--<td>{{user.created_date}}</td>-->
-              <td>fsfsdhj1</td>
-              <td>2dfsdfhj</td>
-              <td>some dummy data</td>
-              <td>other some dummy dataq</td>
-              <td>dumm test text</td>
-
+            <tr *ngFor="let user of users; let i = index ;">
+              <td>{{i +1 }}</td>
+              <td>{{user.fullname}} </td>
+              <td>{{user.username}}</td>
+              <td>{{user.Account_status}}</td>
+              <td>{{user.created_at}}</td>
               <td>
                 <span class="badge badge-secondary">    <a  data-toggle="modal" (click)="oneActivate()"><i class="fa fa-lightbulb-o"></i>&nbsp;Activate</a></span>
                 <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onRemove()"><i class="fa fa-remove"></i>&nbsp;Remove</a></span>
-                <span class="badge badge-success">    <a  data-toggle="modal" (click)=" onEdit()"><i class="fa fa-edit"></i>&nbsp;Edit Info</a></span>
+                <span class="badge badge-success">    <a  data-toggle="modal" (click)="editModal.show(); onEditUser(user)"><i class="fa fa-edit"></i>&nbsp;Edit Info</a></span>
                 <!--<button type="button" class="btn  btn-outline-success btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Activate</button>-->
                 <!--<button type="button" class="btn btn-sm btn-outline-danger btn-sm"><i class="fa fa-remove"></i>&nbsp; Remove</button>-->
                 <!--<button type="button" class="btn btn-sm btn-outline-secondary btn-sm"><i class="fa fa-edit"></i>&nbsp; Edit</button>-->
@@ -48,131 +38,155 @@
 
             </tbody>
           </table>
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
+
+
+
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i>  Create User Account
+        </div>
+        <div class="card-body">
+  <form  (ngSubmit)="onAdduser(add)" #add="ngForm">
+    <!--Full Name -->
+    <div class="row">
+      <label for="fullname"></label>
+      <div class="form-group col-sm-12">
+        <label for="fullname" >Full Name</label>
+        <input type="text" class="form-control" id="fullname" placeholder=" Full Name" [(ngModel)]="fullname" name="fullname" required>
+      </div>
+      <label for="username"></label>
+      <div class="form-group col-sm-12">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" id="username" placeholder="User Name" [(ngModel)]="username" name="username" required>
+      </div>
+      <label for="password"></label>
+      <div class="form-group col-sm-12">
+        <label for="password">Password</label>
+        <input type="text" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+      </div>
+      <div class="form-group col-sm-12">
+        <label for="phonenumber">Phone Number</label>
+        <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber" [(ngModel)]="phonenumber" name="phonenumber" required>
+      </div>
+      <div class="form-group col-sm-12">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" placeholder="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <div class="form-group col-sm-12">
+        <label for="user_privilage">User Privilage</label>
+        <select class="form-control" id="user_privilage" [(ngModel)]="user_privilage" name="user_privilage">
+          <option>Admin</option>
+          <option>Owner</option>
+          <option>Viewer</option>
+
+        </select>
+      </div>
+      <div class="form-group col-sm-12 ">
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!add.valid">Save User</button>
+      </div>
+
+    </div>
+  </form>
+
         </div>
       </div>
     </div>
     <!--/.col-->
   </div>
-  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-info" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-          <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="col-sm-12">
-            <!--Card in the modal-->
-            <div class="card">
-              <div class="card-header text-center">
-                <strong>Add User</strong>
-              </div>
-              <div class="card-body">
-                <!--Form in the modal-->
-
-
-                <form  (ngSubmit)="onAdduser(add)">
-                  <!--Full Name -->
-                  <div class="row">
-                    <label for="fullname"></label>
-                    <div class="form-group col-sm-12">
-                      <label for="fullname" >Full Name</label>
-                      <input type="text" class="form-control" id="fullname" placeholder=" Full Name" [(ngModel)]="fullname" name="fullname" required>
-                    </div>
-                    <label for="username"></label>
-                    <div class="form-group col-sm-12">
-                      <label for="username">User Name</label>
-                      <input type="text" class="form-control" id="username" placeholder="User Name" [(ngModel)]="username" name="username" required>
-                    </div>
-                    <label for="password"></label>
-                    <div class="form-group col-sm-12">
-                      <label for="password">Password</label>
-                      <input type="text" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="phonenumber">Phone Number</label>
-                      <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber" [(ngModel)]="phonenumber" name="phonenumber" required>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control" id="email" placeholder="email" [(ngModel)]="email" name="email" required>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="UserPrivilage">User Privilage</label>
-                      <select class="form-control" id="UserPrivilage" [(ngModel)]="UserPrivilage" name="UserPrivilage">
-                        <option>Admin</option>
-                        <option>Owner</option>
-                        <option>Viewer</option>
-
-                      </select>
-                    </div>
-                    <div class="form-group col-sm-12 ">
-                      <button type="submit" class="btn btn-outline-primary pull-right" (click)="infoModal.hide()">Save User</button>
-                    </div>
-
-                  </div>
-                </form>
-
-
-              </div>
-            </div>
-          </div><!--/.col-->
-
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-
-
-  <!--Edit modal-->
-  <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Contact registration</h4>
-          <button type="button" class="close" (click)="editModal.hide() " aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <strong>Contacts</strong>
-                <small>Registration FORM</small>
-              </div>
-              <div class="card-body">
-                <!--edit modal form-->
-
-
-
-              </div>
-            </div>
-          </div><!--/.col-->
-
-        </div>
-        <div class="modal-footer">
-
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 </div>
+
+<!--Edit modal-->
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-edit" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit User Account</h4>
+        <button type="button" class="close" (click)="editModal.hide() " aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <strong></strong>
+              <small>Account FORM</small>
+            </div>
+            <div class="card-body">
+
+
+
+
+              <form  (ngSubmit)="onUserUpdate(edit)" #edit="ngForm">
+                <!--Full Name -->
+                <div class="row">
+                  <label for="fullname"></label>
+                  <div class="form-group col-sm-12">
+                    <label for="fullname" >Full Name</label>
+                    <input type="text" class="form-control" id="fullname" placeholder=" Full Name" [(ngModel)]="users_list.fullname" name="fullname" required>
+                  </div>
+                  <label for="username"></label>
+                  <div class="form-group col-sm-12">
+                    <label for="username">User Name</label>
+                    <input type="text" class="form-control" id="username" placeholder="User Name" [(ngModel)]="users_list.username" name="username" required>
+                  </div>
+                  <label for="password"></label>
+                  <div class="form-group col-sm-12">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password" placeholder="Password" [(ngModel)]="users_list.password" name="password" required>
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="phonenumber">Phone Number</label>
+                    <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber" [(ngModel)]="users_list.phonenumber" name="phonenumber" required>
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="email" [(ngModel)]="users_list.email" name="email" required>
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="user_privilage">User Privilage</label>
+                    <select class="form-control" id="user_privilage" [(ngModel)]="users_list.user_privilage" name="user_privilage">
+                      <option>Admin</option>
+                      <option>Owner</option>
+                      <option>Viewer</option>
+
+                    </select>
+                  </div>
+                  <div class="form-group col-sm-12 ">
+                    <button type="submit" class="btn btn-primary pull-right" (click)="editModal.hide()" [disabled]="!edit.valid">Update User</button>
+                  </div>
+
+                </div>
+              </form>
+
+
+            </div>
+          </div>
+        </div><!--/.col-->
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

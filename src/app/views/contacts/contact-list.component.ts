@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Contact } from 'app/contact.interface';
-import { ContactService } from 'app/contact.service';
+import { Contact } from 'app/views/contacts/contact.interface';
+import { ContactService } from 'app/views/contacts/services/contact.service';
 import { Response } from '@angular/http';
 import { ContactObject } from './contact.object';
 
@@ -18,7 +18,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: any;
    contactnew = new ContactObject;
-          constructor(private contactservice: ContactService){ }
+          constructor(private contactservice: ContactService ){ }
 // get contact list when page loads
 
         ngOnInit() {
@@ -61,7 +61,7 @@ export class ContactListComponent implements OnInit {
          ondelete(contacts) {
 
                      this.contactservice.deleteContact(this.contactnew.id).subscribe(
-                    success => { alert('Contact Deleted')
+                       () => { alert('Contact Deleted')
 
                       // const postion  = this.contactnew.indexOf(contacts, 0);
                       // if (postion > -1){

@@ -1,7 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
-import { ContactGroupService } from 'app/contact-group.service';
+import { ContactGroupService } from 'app/views/contacts/services/contact-group.service';
 import { NgForm } from '@angular/forms';
-import { Group } from 'app/group.interface';
+import { Group } from 'app/views/contacts/group.interface';
 import { Response } from '@angular/http';
 import { GroupObject } from './group.object';
 
@@ -21,10 +21,10 @@ export class ContactGroupComponent implements OnInit {
             (error: Response ) => console.log(error) );
                 }
 // Create new Group
-     onSubmit(g: NgForm ){
+     onSubmit(g: NgForm ) {
             this.contactgroupservice.addGroup(g.value).subscribe(
             () => alert('Group Created ') );
-            this.onrefresh();
+            // this.onrefresh();
             g.reset();
                          }
      onDetail(id: number) {
@@ -33,18 +33,18 @@ export class ContactGroupComponent implements OnInit {
        // console.log( this.groupnew.id);
      }
 
-  ondelete(id: number) {
-    this.groupnew.id = id;
-
-    this.contactgroupservice.deleteGroup(this.groupnew.id).subscribe(
-      () => { alert('Contact Deleted!')} );
-  }
+  // ondelete(id: number) {
+  //   this.groupnew.id = id;
+  //
+  //   this.contactgroupservice.deleteGroup(this.groupnew.id).subscribe(
+  //     () => { alert('Contact Deleted!')} );
+  // }
 // refresh after method excution
-    onrefresh(){
-            this.contactgroupservice.getGroup().subscribe(
-             grouplist  => { this.groups = grouplist['contactgroup'];},
-             (error: Response ) => console.log(error) );
-               }
+//     onrefresh(){
+//             this.contactgroupservice.getGroup().subscribe(
+//              grouplist  => { this.groups = grouplist['contactgroup'];},
+//              (error: Response ) => console.log(error) );
+//                }
 
 
 

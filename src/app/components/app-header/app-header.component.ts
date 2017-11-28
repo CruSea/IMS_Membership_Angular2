@@ -1,4 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,7 @@ import { Component, ElementRef } from '@angular/core';
 })
 export class AppHeader {
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private router: Router) { }
 
   //wait for the component to render completely
   ngOnInit(): void {
@@ -18,5 +19,11 @@ export class AppHeader {
     }
     // remove the empty element(the host)
     parentElement.removeChild(nativeElement);
+  }
+
+
+  onlogout(){
+      window.localStorage.removeItem('token_auth_key');
+      this.router.navigate(['auth/login']);
   }
 }
