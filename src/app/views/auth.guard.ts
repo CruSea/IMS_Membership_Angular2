@@ -7,13 +7,22 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-
+   isLogedin;
   constructor( private authservice: AuthService, private router : Router){}
   canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-      this.router.navigate(['/']);
-    console.log('authgard activaed', this.authservice.getUserLogedIn());
-
     return this.authservice.getUserLogedIn();
+
+
+    // if( this.authservice.getUserLogedIn()){
+    //   return true;
+    // }else{
+    //
+    //   this.router.navigate(['/']);
+    // }
+
+    // console.log('authgard activaed', this.authservice.getUserLogedIn());
+
+
 
   }
 }

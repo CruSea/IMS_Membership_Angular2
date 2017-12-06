@@ -37,17 +37,22 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        canActivate: [ AuthGuard ],
+        // canActivate: [ AuthGuard ],
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
       {
+        path: 'messages',
+        // canActivate: [ AuthGuard ],
+        loadChildren: './views/messages/messages.module#MessagesModule'
+      },
+      {
         path: 'contacts',
-        canActivate: [ AuthGuard ],
+        // canActivate: [ AuthGuard ],
         loadChildren: './views/contacts/contacts.module#ContactsModule'
       },
       {
         path: 'settings',
-        canActivate: [ AuthGuard ],
+        // canActivate: [ AuthGuard ],
         loadChildren: './views/settings/settings.module#SettingsModule'
       }
     ]

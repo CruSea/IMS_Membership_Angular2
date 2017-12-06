@@ -24,15 +24,17 @@
               <td>{{i +1 }}</td>
               <td>{{user.fullname}} </td>
               <td>{{user.username}}</td>
-              <td>{{user.Account_status}}</td>
+              <td>
+                <label class="switch switch-sm switch-3d switch-primary">
+                <input type="checkbox" [(ngModel)]="user.Account_status" (change)="activate(user)" class="switch-input" checked>
+                <span class="switch-label"></span>
+                <span class="switch-handle"></span>
+              </label>
+              </td>
               <td>{{user.created_at}}</td>
               <td>
-                <span class="badge badge-secondary">    <a  data-toggle="modal" (click)="oneActivate()"><i class="fa fa-lightbulb-o"></i>&nbsp;Activate</a></span>
                 <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onRemove()"><i class="fa fa-remove"></i>&nbsp;Remove</a></span>
-                <span class="badge badge-success">    <a  data-toggle="modal" (click)="editModal.show(); onEditUser(user)"><i class="fa fa-edit"></i>&nbsp;Edit Info</a></span>
-                <!--<button type="button" class="btn  btn-outline-success btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Activate</button>-->
-                <!--<button type="button" class="btn btn-sm btn-outline-danger btn-sm"><i class="fa fa-remove"></i>&nbsp; Remove</button>-->
-                <!--<button type="button" class="btn btn-sm btn-outline-secondary btn-sm"><i class="fa fa-edit"></i>&nbsp; Edit</button>-->
+                <span class="badge badge-success">    <a  data-toggle="modal" (click)="editModal.show(); onEditUser(user)"><i class="fa fa-edit"></i>&nbsp;Edit</a></span>
               </td>
             </tr>
 
@@ -91,10 +93,10 @@
       </div>
       <div class="form-group col-sm-12">
         <label for="user_privilage">User Privilage</label>
-        <select class="form-control" id="user_privilage" [(ngModel)]="user_privilage" name="user_privilage">
-          <option>Admin</option>
-          <option>Owner</option>
-          <option>Viewer</option>
+        <select class="form-control" id="role_id" [(ngModel)]="role_id" name="role_id">
+          <option value="1"></option>
+          <option value="2">Owner</option>
+          <option value="3">Viewer</option>
 
         </select>
       </div>
@@ -161,8 +163,8 @@
                     <input type="text" class="form-control" id="email" placeholder="email" [(ngModel)]="users_list.email" name="email" required>
                   </div>
                   <div class="form-group col-sm-12">
-                    <label for="user_privilage">User Privilage</label>
-                    <select class="form-control" id="user_privilage" [(ngModel)]="users_list.user_privilage" name="user_privilage">
+                    <label for="role_id">User Privilage</label>
+                    <select class="form-control" id="role_id" [(ngModel)]="users_list.role_id" name="role_id">
                       <option>Admin</option>
                       <option>Owner</option>
                       <option>Viewer</option>

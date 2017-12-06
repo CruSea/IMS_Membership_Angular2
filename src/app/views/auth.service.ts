@@ -8,15 +8,10 @@ export class AuthService {
   @Output() autheticate_emiter = new EventEmitter<boolean>();
   private is_authenticated: boolean;
   constructor(private httpRequest: HttpService) {
-    this.is_authenticated=false;
+    this.is_authenticated = false;
   }
 
-  signuUp(user: UserObject) {
-     this.httpRequest.sendPostRequest('signup', user,
-      {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} ).subscribe(
-       () => alert('created')
-     );
-  }
+
   authenticate(Email: string, Password: string) {
      this.httpRequest.sendPostRequest('signin', {email: Email, password: Password},
       {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} ) .subscribe(
@@ -49,11 +44,7 @@ export class AuthService {
      }
 
    }
-   getUserLogedIn(){
-      return this.is_authenticated;
 
-
-   }
   private authenticate_user(response: any, status) {
            if ( status) {
                  if (response && response.token) {
@@ -71,21 +62,12 @@ public getUserToken() {
    // console.log(localStorage.getItem('token_auth_key'))
 
 }
+  getUserLogedIn(){
+    return this.is_authenticated;
 
 
+  }
 
-
-
-  // getuser(){
-  //    this.httpRequest.sendGetRequest<UserObject>('signup');
-  // }
-
-  // updateUser(user_id: number, UpdatedUser: UserObject) {
-  //    this.httpRequest.sendPutRequest('signup' + user_id, UpdatedUser,
-  //     { headers : new HttpHeaders ({'Content-Type': 'application/json' })
-  //     }
-  //   );
-  // }
 }
 
 
@@ -93,40 +75,6 @@ public getUserToken() {
 
 
 
-
-
-// import { Injectable } from '@angular/core';
-//
-// import { HttpClient, HttpHeaders} from '@angular/common/http';
-// import { UserObject} from './settings/user.object';
-// import 'rxjs/Rx';
-// @Injectable()
-// export class AuthService {
-//
-//   constructor(private http: HttpClient) { }
-//
-//       signuUp(user: UserObject) {
-//     return this.http.post('http://localhost/testapp/public/api/signup', user,
-//       {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} );
-//             }
-//       signIn(Email: string, Password: string) {
-//         return this.http.post('http://localhost/testapp/public/api/signin', {email: Email, password: Password},
-//           {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} );
-//       }
-//
-//
-//
-//        getuser(){
-//             return this.http.get<UserObject>('http://localhost/testapp/public/api/signup');
-//        }
-//
-//        updateUser(user_id: number, UpdatedUser: UserObject) {
-//             return this.http.put('http://localhost/testapp/public/api/Users/signup' + user_id, UpdatedUser,
-//               { headers : new HttpHeaders ({'Content-Type': 'application/json' })
-//               }
-//               );
-//        }
-// }
 
 
 

@@ -5,7 +5,7 @@ export  class UserObject {
   public  email: string;
   public  password: string;
   public  phonenumber: number;
-  public  user_privilage: string;
+  public  role_id: number;
   constructor(){
 
   }

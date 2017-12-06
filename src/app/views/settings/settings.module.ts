@@ -10,6 +10,7 @@ import {SettingsRoutingModule} from './settings-routing.module';
 import { UserComponent } from './user.component';
 import {AuthService} from '../auth.service';
 import {HttpService} from '../http.service';
+import {UserService} from "./services/user.service";
 
 
 
@@ -22,7 +23,7 @@ import {HttpService} from '../http.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ AuthService, HttpService],
+  providers: [ AuthService, HttpService, UserService],
   declarations: [UserComponent]
 })
 export class SettingsModule { }

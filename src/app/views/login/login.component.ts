@@ -18,14 +18,11 @@ export class LoginComponent implements OnInit {
        this.authservice.authenticate(form.value.email, form.value.password);
     this.authservice.autheticate_emiter.subscribe( res => {
       if (res) {
-        console.log('what now?' , this.authservice.getUserLogedIn());
         this.router.navigate(['/dashboard']);
+        // console.log('what now?' , this.authservice.getUserLogedIn());
+
       }
     } );
-
-
-
-    console.log('wsubmited' , this.authservice.getUserLogedIn());
 
 
   }
