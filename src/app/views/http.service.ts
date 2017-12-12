@@ -23,10 +23,10 @@ export class HttpService {
         return this.httpRequest.post(full_url, body, header);
       }
       public  sendCustomPutRequest(full_url, body, header ) {
-        return this.httpRequest.post(full_url, body, header);
+        return this.httpRequest.put(full_url, body, header);
       }
       public  sendCustomDeleteRequest(id) {
-        return this.httpRequest.get(id);
+        return this.httpRequest.delete(id);
       }
 
 

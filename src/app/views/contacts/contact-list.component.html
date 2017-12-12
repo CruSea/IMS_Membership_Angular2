@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let contact of contacts | filter :term ; let i = index ;">
+            <tr *ngFor="let contact of this.contact_list_paginator.data | filter :term ; let i = index ;">
                 <td>{{i +1 }}</td>
               <td>{{contact.firstname}} </td>
               <td>{{contact.mobilenumber}}</td>
@@ -48,14 +48,19 @@
         </table>
         <nav>
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="contact_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="contact_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{contact_list_paginator.current_page + '/' + contact_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="contact_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="contact_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </nav>
       </div>
@@ -64,7 +69,7 @@
   <!--/.col-->
 </div>
  <div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-primary" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Add Contact</h4>

@@ -1,15 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
-import {AuthService} from "../auth.service";
+import {DashboardService} from './dashboard.service';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+  contact_count: any;
+  sent_message_count:any;
+  constructor(private dashboardservice: DashboardService) { }
+  ngOnInit(){
+        this.dashboardservice.contact_count().subscribe(
+              count => {this.contact_count = count},
 
-  constructor(private authservice: AuthService) { }
-  // ngOnInit(){
-  //      console.log('sucessfull!',this.authservice.getUserLogedIn());
-  // }
+        );
+
+    this.dashboardservice.sent_message__count().subscribe(
+      count => {this.sent_message_count = count},
+
+    );
+  }
 
 }

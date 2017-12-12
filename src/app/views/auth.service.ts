@@ -14,22 +14,17 @@ export class AuthService {
 
   authenticate(Email: string, Password: string) {
      this.httpRequest.sendPostRequest('signin', {email: Email, password: Password},
-      {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} ) .subscribe(
+      {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})} ).subscribe(
           data => { this.authenticate_user(data, true )},
-                error => { this.authenticate_user(error, false ) }
+          error => { this.authenticate_user(error, false ) }
      );
   }
-  // public isAuthenticated(){
-  //    return this.is_authenticated;
-  // }
-   public  login(){
-          if(this.getUserToken() != null){
+   public  login() {
+          if (this.getUserToken() != null) {
               this.httpRequest.sendGetRequest('signin?token=' + this.getUserToken()).subscribe(
                    data => {this.login_status(data)},
-                   error => {this.login_status(error)}
-
-              );
-          }
+                   error => {this.login_status(error)} );
+             }
    }
 
    login_status(login_data){
@@ -42,9 +37,12 @@ export class AuthService {
        this.autheticate_emiter.emit(false);
        this.is_authenticated = false;
      }
-
    }
+      public getUserLogedIn(){
+        return this.is_authenticated;
 
+
+      }
   private authenticate_user(response: any, status) {
            if ( status) {
                  if (response && response.token) {
@@ -62,11 +60,7 @@ public getUserToken() {
    // console.log(localStorage.getItem('token_auth_key'))
 
 }
-  getUserLogedIn(){
-    return this.is_authenticated;
 
-
-  }
 
 }
 

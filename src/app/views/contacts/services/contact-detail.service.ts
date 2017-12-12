@@ -10,9 +10,9 @@ export class ContactDetailService {
 
   constructor(private http: HttpService, private authservice: AuthService) { }
 // contact adding and removing service
-              postTogroup( group_id: number, contact_id: number){
+              addTogroup( group_id: number, contact_id: number){
                 const token = this.authservice.getUserToken();
-                  return this.http.sendCustomPostRequest('http://localhost/testapp/public/api/Contact-detail/' + group_id, + ' / ' + contact_id + '?token=' + token,{
+                  return this.http.sendCustomPostRequest('http://localhost:80/testapp/public/api/Contact-detail/' + group_id, + ' / ' + contact_id + '?token=' + token ,{
                               headers : new HttpHeaders ({'Content-Type': 'application/json' }) });
                                  }
 // Remove Contact from group

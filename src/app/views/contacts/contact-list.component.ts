@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Contact } from 'app/views/contacts/contact.interface';
 import { ContactService } from 'app/views/contacts/services/contact.service';
 import { Response } from '@angular/http';
-import { ContactObject } from './contact.object';
+import { Contact, ContactsPaginator  } from './contact.object.mapper';
 
 @Component({
   selector: 'app-contact-list',
@@ -16,22 +15,31 @@ import { ContactObject } from './contact.object';
 })
 export class ContactListComponent implements OnInit {
 
-  contacts: any;
-   contactnew = new ContactObject;
+    contacts: any;
+   public contactnew = new Contact;
+   public contact_list_paginator = new ContactsPaginator();
+
           constructor(private contactservice: ContactService ){ }
 // get contact list when page loads
+       ngOnInit() {
+                   //  this.contactservice.getContact().subscribe(
+                   // contactslist => { this.contacts = contactslist['contacts']; console.log(this.contacts) },
+                   // (error: Response ) => console.log(error));
 
-        ngOnInit() {
-                    this.contactservice.getContact().subscribe(
-                   contactslist => { this.contacts = contactslist['contacts']; },
-                   (error: Response ) => console.log(error));
+                      this.contactservice.getContactPaginator();
+                      this.contactservice.Contactlistpaginator.subscribe(
+                           data => {  this.contact_list_paginator = data }
+                      );
                     }
+  public getPaginatedContact(request_url) {
+    this.contactservice.getPaginatedContact(request_url);
+  }
  // add contact on modal form submit
         onSubmit(form: NgForm ){
                     this.contactservice.addContact(form.value).subscribe(
                    data => alert('Contact Created ') );
                     form.reset();
-                     this.onrefresh();
+                     // this.onrefresh();
                                }
 
   //
@@ -50,7 +58,7 @@ export class ContactListComponent implements OnInit {
                      this.contactnew = contacts;
                           }
 // update contact information
-         onupdate( edit: NgForm ) {
+         onupdate() {
                      this.contactservice.updateContact(this.contactnew.id, this.contactnew).subscribe(
                     () => alert('Contact Info updated!!'));
                         // this.contacts = this.contactnew;
@@ -71,11 +79,11 @@ export class ContactListComponent implements OnInit {
                     } );
            // this.onrefresh();
                     }
-         onrefresh(){
-                     this.contactservice.getContact().subscribe(
-                    contactslist => { this.contacts = contactslist['contacts']; },
-                    (error: Response ) => console.log(error) );
-                    }
+         // onrefresh(){
+         //             this.contactservice.getContact().subscribe(
+         //            contactslist => { this.contacts = contactslist['contacts']; },
+         //            (error: Response ) => console.log(error) );
+         //            }
               // onremoved(contactnew: Contact){
               //         const postion = this.contactnew.
 

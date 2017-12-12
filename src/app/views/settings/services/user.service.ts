@@ -9,7 +9,8 @@ export class UserService {
   constructor(private  authservice: AuthService , private http: HttpService) { }
 
   signuUp(user: UserObject) {
-    return this.http.sendCustomPostRequest('http://localhost/testapp/public/api/signup', user,
+    const token = this.authservice.getUserToken();
+    return this.http.sendCustomPostRequest('http://localhost/testapp/public/api/signup?token=' + token, user,
       {headers : new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})}
     );
   }
@@ -20,13 +21,18 @@ export class UserService {
   }
   activateUser(user_id: number, UpdatedUser ){
     const token = this.authservice.getUserToken();
-    return this.http.sendCustomPostRequest('http://localhost:80/testapp/public/api/status/' + user_id + '?token=' + token , UpdatedUser,
+    return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/status/' + user_id + '?token=' + token , UpdatedUser,
         { headers : new HttpHeaders ({'Content-Type': 'application/json' })
         }
       );
   }
+  getRole(){
+    const token = this.authservice.getUserToken();
+    return this.http.sendCustomGetRequest('http://localhost/testapp/public/api/role?token=' + token)
+  }
   // updateUser(user_id: number, UpdatedUser: UserObject) {
-  //    this.http.sendPutRequest('signup' + user_id, UpdatedUser,
+  //   const token = this.authservice.getUserToken();
+  //    return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/signup/' + user_id + '?token=' + token, UpdatedUser,
   //     { headers : new HttpHeaders ({'Content-Type': 'application/json' })
   //     }
   //   );

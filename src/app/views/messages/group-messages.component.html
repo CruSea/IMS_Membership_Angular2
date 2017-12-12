@@ -19,14 +19,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr >
+            <tr *ngFor="let group_message of group_messages; let i = index;">
               <td>{{i +1 }}</td>
-              <td>{{message}} </td>
-              <td>{{message}}</td>
-              <td>  {{message}} </td>
+              <td>{{group_message.message}} </td>
+              <td>{{group_message.group.groupname}}</td>
+              <td>  {{group_message.sent_by}} </td>
+              <td>  {{group_message.created_at}} </td>
               <td>
 
-                <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onDelete()"><i class="fa fa-remove"></i>&nbsp;Delete</a></span>
+                <span class="badge badge-danger">    <a  data-toggle="modal" (click)="onDelete(group_message.id)"><i class="fa fa-remove"></i>&nbsp;Delete</a></span>
               </td>
             </tr>
 
@@ -60,17 +61,16 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label for="groupname">Group Name</label>
-                <select class="form-control" id="groupname" [(ngModel)]="groupname" name="groupname">
-                  <option>Admin</option>
-                  <option>Owner</option>
-                  <option>Viewer</option>
+                <select class="form-control" id="group_id" [(ngModel)]="groupname" name="group_id">
+                  <option *ngFor="let group of groups" value="{{group.id}}">{{group.groupname}}</option>
+
 
                 </select>
               </div>
               <div class="form-group col-sm-12">
                 <label for="message">Message</label>
 
-                  <textarea id="message" name="message" rows="9" cols="6" class="form-control" placeholder="Write Message here..."></textarea>
+                  <textarea id="message" name="message" rows="9" cols="6" class="form-control"  [(ngModel)]="message" placeholder="Write Message here..."></textarea>
 
               </div>
               <div class="form-group col-sm-12 ">

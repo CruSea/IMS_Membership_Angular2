@@ -94,9 +94,9 @@
       <div class="form-group col-sm-12">
         <label for="user_privilage">User Privilage</label>
         <select class="form-control" id="role_id" [(ngModel)]="role_id" name="role_id">
-          <option value="1"></option>
-          <option value="2">Owner</option>
-          <option value="3">Viewer</option>
+          <option  *ngFor="let roles of role" value="{{roles.id}}">{{roles.role_name}}</option>
+          <!--<option value="2">Owner</option>-->
+          <!--<option value="3">Viewer</option>-->
 
         </select>
       </div>
@@ -116,7 +116,7 @@
 
 <!--Edit modal-->
 <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-edit" role="document">
+  <div class="modal-dialog modal-edit modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Edit User Account</h4>
@@ -165,9 +165,9 @@
                   <div class="form-group col-sm-12">
                     <label for="role_id">User Privilage</label>
                     <select class="form-control" id="role_id" [(ngModel)]="users_list.role_id" name="role_id">
-                      <option>Admin</option>
-                      <option>Owner</option>
-                      <option>Viewer</option>
+                      <option  *ngFor="let roles of role" value="{{roles.id}}">{{roles.role_name}}</option>
+                      <!--<option value="2">Owner</option>-->
+                      <!--<option value="3">Viewer</option>-->
 
                     </select>
                   </div>
