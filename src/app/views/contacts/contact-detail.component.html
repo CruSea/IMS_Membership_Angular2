@@ -6,7 +6,8 @@
           <i class="fa fa-align-justify"></i>  Contact Groups
         </div>
         <div class="card-body">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped table-hover table-condensed table-sm">
+
             <thead>
             <tr>
               <th>#</th>
@@ -18,28 +19,33 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let group of  groupContactlist; let i = index; ">
-              <td>{{ i + 1}}</td>
+            <tr *ngFor="let group of  this.group_list_paginator.data ; let i = index; ">
+              <td>{{ i + group_list_paginator.from}}</td>
               <td>{{group.contact.firstname}}</td>
               <td>{{group.contact.mobilenumber}}</td>
               <td>{{group.contact.region}}</td>
               <td>{{group.contact.created_at}}</td>
 
               <td>
-                <a (click)="removeFromgroup(group.contact.id)"><span class="badge badge-success">Remove</span></a>
+                <a (click)="removeFromgroup(group.id)"><span class="badge badge-danger"> x Remove</span></a>
               </td>
             </tr>
             </tbody>
           </table>
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="group_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedGroup(group_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="group_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedGroup(group_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{group_list_paginator.current_page + '/' + group_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="group_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedGroup(group_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="group_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedGroup(group_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </div>
       </div>
@@ -60,24 +66,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let contact of  contacts">
+            <tr *ngFor="let contact of  this.contact_list_paginator.data">
               <td>{{contact.firstname}}</td>
               <td>{{contact.mobilenumber}}</td>
               <td>
-                <a (click)="addTogroup(contact.id)"><span class="badge badge-success">Add To Group</span></a>
+
+               <a (click)="addTogroup(contact.id)"><span class="badge badge-primary">+ Add To Group</span></a>
               </td>
             </tr>
             </tbody>
           </table>
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="contact_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="contact_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{contact_list_paginator.current_page + '/' + contact_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="contact_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="contact_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedContact(contact_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import { UserObject} from './settings/user.object';
+import { User } from './settings/user.object.mapper';
 import 'rxjs/Rx';
 import {HttpService} from './http.service';
 import {HttpHeaders} from '@angular/common/http';

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ContactService } from 'app/views/contacts/services/contact.service';
-import { Response } from '@angular/http';
 import { Contact, ContactsPaginator  } from './contact.object.mapper';
 
 @Component({
@@ -21,25 +20,22 @@ export class ContactListComponent implements OnInit {
 
           constructor(private contactservice: ContactService ){ }
 // get contact list when page loads
-       ngOnInit() {
-                   //  this.contactservice.getContact().subscribe(
-                   // contactslist => { this.contacts = contactslist['contacts']; console.log(this.contacts) },
-                   // (error: Response ) => console.log(error));
-
-                      this.contactservice.getContactPaginator();
-                      this.contactservice.Contactlistpaginator.subscribe(
-                           data => {  this.contact_list_paginator = data }
-                      );
-                    }
+ ngOnInit() {
+    this.UpdatepagePaginator();
+    this.contactservice.Contactlistpaginator.subscribe(
+         data => {  this.contact_list_paginator = data } );
+            }
+  public UpdatepagePaginator(){
+    this.contactservice.getContactPaginator();
+  }
   public getPaginatedContact(request_url) {
     this.contactservice.getPaginatedContact(request_url);
   }
  // add contact on modal form submit
-        onSubmit(form: NgForm ){
+   public onSubmit(form: NgForm ){
                     this.contactservice.addContact(form.value).subscribe(
-                   data => alert('Contact Created ') );
+                   data => { this.UpdatepagePaginator()} );
                     form.reset();
-                     // this.onrefresh();
                                }
 
   //
@@ -58,32 +54,19 @@ export class ContactListComponent implements OnInit {
                      this.contactnew = contacts;
                           }
 // update contact information
-         onupdate() {
-                     this.contactservice.updateContact(this.contactnew.id, this.contactnew).subscribe(
-                    () => alert('Contact Info updated!!'));
+      public  onupdate() {
+     console.log(this.contactnew.id, this.contactnew);
+                this.contactservice.updateContact(this.contactnew.id, this.contactnew).subscribe(
+                    () => { this.UpdatepagePaginator();});
                         // this.contacts = this.contactnew;
                                   }
+// delete contact information
+      public  ondelete(contacts) {
+               this.contactservice.deleteContact(this.contactnew.id).subscribe(
+                       () => { this.UpdatepagePaginator() } );
 
-      // delete contact information
-
-         ondelete(contacts) {
-
-                     this.contactservice.deleteContact(this.contactnew.id).subscribe(
-                       () => { alert('Contact Deleted')
-
-                      // const postion  = this.contactnew.indexOf(contacts, 0);
-                      // if (postion > -1){
-                      //   this.contactnew.splice(postion, 1);
-                      // }
-
-                    } );
-           // this.onrefresh();
                     }
-         // onrefresh(){
-         //             this.contactservice.getContact().subscribe(
-         //            contactslist => { this.contacts = contactslist['contacts']; },
-         //            (error: Response ) => console.log(error) );
-         //            }
+
               // onremoved(contactnew: Contact){
               //         const postion = this.contactnew.
 

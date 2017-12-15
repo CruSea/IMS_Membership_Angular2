@@ -6,51 +6,57 @@ import { GroupObject } from './group.object';
 import { ContactGroupService } from 'app/views/contacts/services/contact-group.service';
 import { ContactDetailService } from 'app/views/contacts/services/contact-detail.service';
 import {AuthService} from "../auth.service";
+import {ContactDetailPaginator} from "./group_members.object.mapper";
 
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
 })
 export class ContactDetailComponent implements OnInit {
-  contacts: any;
-  public contactnew = new Contact;
+ contact:Contact[];
+  // public contactnew = new Contact();
   @Output() group_count = new EventEmitter();
   @Input() groupContactlist: any;
+  public contact_list_paginator = new ContactsPaginator();
+  public group_list_paginator = new ContactDetailPaginator();
   constructor( private contactservice: ContactService, private contactdetailservice: ContactDetailService ){}
 
   ngOnInit() {
 // Get contacts on page load
-
-                // this.contactservice.getContact().subscribe(
-                // contact => {this.contacts = contact['contacts'];},
-                // (error: Response ) => console.log(error) );
+          this.updatePagesContactList();
+          this.contactservice.getContactPaginator();
+          this.contactdetailservice.Contactlistpaginator.subscribe(
+               data => { this.contact_list_paginator = data }
+          );
 // Get groups on page load
-              const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
-                  this.contactdetailservice.getGroup(group_list_id).subscribe(
-                  group => {this.groupContactlist = group['groupmembers']; console.log(this.group_count.emit( this.groupContactlist )) },
-
-                  (error: Response ) => console.log(error)
-
-                  );
-
-
+            this.UpdatePagePaginator();
+            this.contactdetailservice.Grouplistpaginator.subscribe(
+               data => {this.group_list_paginator = data; } );
+             }
+  public UpdatePagePaginator(){
+    const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
+    this.contactdetailservice.getGroupDetailPaginator(group_list_id);
   }
-
-  // removeFromgroup(){
-  //
-  // }
-
-  addTogroup( contacts, group_id: number , contact_id: number ) {
-            this.contactnew = contacts;
+  public updatePagesContactList(){
+    const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
+    console.log(group_list_id);
+    this.contactdetailservice.getContactPaginator(group_list_id);
+  }
+  public getPaginatedGroup(request_url) {
+    this.contactdetailservice.getPaginatedGroup(request_url);
+  }
+  public getPaginatedContact(request_url) {
+    this.contactdetailservice.getPaginatedContact(request_url);
+  }
+ public addTogroup( contact_id: number) {
     const group_add_id = JSON.parse(localStorage.getItem('current_group_id' ));
-                group_id = group_add_id;
-                contact_id = this.contactnew.id;
-    this.contactdetailservice.addTogroup(group_id, contact_id).subscribe(
-      () => alert('Contact Added To Group! ') );
+    this.contactdetailservice.addTogroup(group_add_id, contact_id).subscribe(
+      () => { this.UpdatePagePaginator(); this.updatePagesContactList() } );
   }
-  removeFromgroup(contact_id: number){
-          this.contactdetailservice.removeComtact(contact_id).subscribe(
-            () => alert('Contact Removed from group!!!') );
+ public removeFromgroup(id: number){
+    console.log(id);
+          this.contactdetailservice.removeContact(id).subscribe(
+            () => { this.UpdatePagePaginator() } );
    }
 
 }

@@ -30,7 +30,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let contact of this.contact_list_paginator.data | filter :term ; let i = index ;">
-                <td>{{i +1 }}</td>
+                <td>{{i + contact_list_paginator.from }}</td>
               <td>{{contact.firstname}} </td>
               <td>{{contact.mobilenumber}}</td>
               <td>{{contact.email}}</td>
@@ -239,104 +239,118 @@
                     </div>
                <div class="card-body">
  <!--edit modal form-->
-        <form  (ngSubmit)="onupdate(edit)" #edit="ngForm">
- <!--Full Name -->
-            <div class="row">
-            <label for="firstname" class="col-sm-5"></label>
+        <form  (ngSubmit)="onupdate(edit)" #edit="ngForm" enctype="multipart/form-data" method="post">
+          <!--Full Name -->
+          <div class="row">
+            <label  class="col-sm-5"></label>
             <div class="form-group col-sm-7">
-              <label for="firstname" >First Name</label>
-              <input type="text" class="form-control" id="firstname" placeholder="Enter your first name" [(ngModel)]="contactnew.firstname" name="firstname" required>
+              <label >First Name</label>
+              <input type="text" class="form-control"  #firstNm="ngModel" id="firstname" placeholder="Enter your first name" [(ngModel)]="contactnew.firstname" name="firstname" required>
+              <div *ngIf="!firstNm.valid && firstNm.dirty">
+                First Name Required!
+              </div>
             </div>
-            <label for="firstname" class="col-sm-5"></label>
+            <label  class="col-sm-5"></label>
             <div class="form-group col-sm-7">
-                <label for="middlename">Middle Name</label>
-                <input type="text" class="form-control" id="middlename" placeholder="Enter your middle name" [(ngModel)]="contactnew.middlename" name="middlename" required>
+              <label >Middle Name</label>
+              <input type="text" class="form-control" #middlNM="ngModel" id="middlename" placeholder="Enter your middle name" [(ngModel)]="contactnew.middlename" name="middlename" required>
+              <div *ngIf="!middlNM.valid && middlNM.dirty">
+                Middle Name Required!
               </div>
-              <label for="firstname" class="col-sm-5"></label>
-              <div class="form-group col-sm-7">
-                  <label for="lastname">Last Name</label>
-                  <input type="text" class="form-control" id="lastname" placeholder="Enter your last name" [(ngModel)]="contactnew.lastname" name="lastname" required>
-                </div>
-                <label for="firstname" class="col-sm-5">
-                    <input type="file" id="file-input" name="file-input">
-                </label>
-                <div class="form-group col-sm-4">
-                    <label for="sex">Sex</label>
-                    <select class="form-control" id="sex" [(ngModel)]="contactnew.sex" name="sex">
-                      <option>Male</option>
-                      <option>Female</option>
-
-                    </select>
-                  </div>
-                  <div class="form-group col-sm-3">
-                      <label for="age">Age</label>
-                      <input type="text" class="form-control" id="age" placeholder="Enter your age" [(ngModel)]="contactnew.age" name="age" >
-                    </div>
             </div>
- <!--Adress-->
-            <div class="row">
-              <label class="col-sm-2" for="city"><h6>Adress:</h6></label>
-              <div class="form-group col-sm-6">
-                <label for="region">Region</label>
-                <input type="text" class="form-control" id="region" placeholder="enter your region" [(ngModel)]="contactnew.region" name="region" >
+            <label  class="col-sm-5"></label>
+            <div class="form-group col-sm-7">
+              <label >Last Name</label>
+              <input type="text" class="form-control" #lastNM="ngModel" id="lastname" placeholder="Enter your last name" [(ngModel)]="contactnew.lastname" name="lastname" required>
+              <div *ngIf="!lastNM.valid && lastNM.dirty">
+                Last Name Required!
               </div>
-              <div class="form-group col-sm-4">
-                <label for="wereda">Wereda</label>
-                <input type="text" class="form-control" id="wereda" placeholder="enter your wereda" [(ngModel)]="contactnew.wereda" name="wereda" >
+            </div>
+            <div class="form-group col-sm-5">
+              <label for="name">Add Contact Pic</label>
+              <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+
+            </div>
+            <div class="form-group col-sm-4">
+              <label>Sex</label>
+              <select class="form-control" id="sex" [(ngModel)]="contactnew.sex" name="sex">
+                <option>Male</option>
+                <option>Female</option>
+
+              </select>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="age">Age</label>
+              <input type="text" class="form-control" id="age" placeholder="Enter your age" [(ngModel)]="contactnew.age" name="age" >
+            </div>
+          </div>
+          <!--Adress-->
+          <div class="row">
+            <label class="col-sm-2" for=""><h6>Adress:</h6></label>
+            <div class="form-group col-sm-6">
+              <label for="region">Region</label>
+              <input type="text" class="form-control" id="region" placeholder="enter your region" [(ngModel)]="contactnew.region" name="region" >
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="wereda">Wereda</label>
+              <input type="text" class="form-control" id="wereda" placeholder="enter your wereda" [(ngModel)]="contactnew.wereda" name="wereda" >
+            </div>
+            <label class="col-sm-2" for=""></label>
+            <div class="form-group col-sm-6">
+
+              <label for="kebele">Kebele</label>
+              <input type="text" class="form-control" id="kebele" placeholder="enter your kebele" [(ngModel)]="contactnew.kebele" name="kebele">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="housenumber">H.NO</label>
+              <input type="text" class="form-control" id="housenumber" placeholder="enter your house number" [(ngModel)]="contactnew.housenumber" name="housenumber" >
+            </div>
+          </div><!--/.row-->
+          <!--telephone-->
+          <div class="row">
+            <label class="col-sm-2" for=""><h6>TelePhone:</h6></label>
+            <div class="form-group col-sm-6">
+              <label for="officenumber">Office.NO</label>
+              <input type="text" class="form-control" id="officenumber" placeholder="enter your office number" [(ngModel)]="contactnew.officenumber" name="officenumber" >
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="mobilenumber">Mob.NO</label>
+              <input type="text" class="form-control" #mobile="ngModel" id="mobilenumber" placeholder="enter your mobile number"   [(ngModel)]="contactnew.mobilenumber" name="mobilenumber"  required>
+              <div *ngIf="!mobile.valid && mobile.dirty">
+                Phone Number Required!
               </div>
-              <label class="col-sm-2" for="city"></label>
-              <div class="form-group col-sm-6">
+            </div>
+            <label class="col-sm-2" for=""></label>
+            <div class="form-group col-sm-6">
 
-                  <label for="kebele">Kebele</label>
-                  <input type="text" class="form-control" id="kebele" placeholder="enter your kebele" [(ngModel)]="contactnew.kebele" name="kebele">
-                </div>
-                <div class="form-group col-sm-4">
-                  <label for="postal-code">H.NO</label>
-                  <input type="text" class="form-control" id="housenumber" placeholder="enter your house number" [(ngModel)]="contactnew.housenumber" name="housenumber" >
-                </div>
-            </div><!--/.row-->
-  <!--telephone-->
-            <div class="row">
-                  <label class="col-sm-2" for="city"><h6>TelePhone:</h6></label>
-                  <div class="form-group col-sm-6">
-                    <label for="off">Office.NO</label>
-                    <input type="text" class="form-control" id="officenumber" placeholder="enter your office number" [(ngModel)]="contactnew.officenumber" name="officenumber" >
-                  </div>
-                  <div class="form-group col-sm-4">
-                    <label for="mobilenumber">Mob.NO</label>
-                    <input type="text" class="form-control" id="mobilenumber" placeholder="enter your mobile number" [(ngModel)]="contactnew.mobilenumber" name="mobilenumber" required>
-                  </div>
-                  <label class="col-sm-2" for="city"></label>
-                  <div class="form-group col-sm-6">
-
-                      <label for="resnumber">Residence.NO</label>
-                      <input type="text" class="form-control" id="resnumber" placeholder="enter your residence number" [(ngModel)]="contactnew.resnumber" name="resnumber" >
-                    </div>
-                    <div class="form-group col-sm-4">
-                      <label for="postal-code">P.O.BOX</label>
-                      <input type="text" class="form-control" id="pobox" placeholder="enter your postal number" [(ngModel)]="contactnew.pobox" name="pobox" >
-                    </div>
-                </div><!--/.row-->
- <!--email and additional infomation inputs-->
-             <div class="form-group">
-                    <label for="email">Email Adress</label>
-                    <input type="text" class="form-control" id="email" placeholder="Enter email adress name" [(ngModel)]="contactnew.email" name="email" required  pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-                  </div>
-             <div class="row">
-                    <div class="form-group col-sm-4">
-                        <label for="synod">Synod</label>
-                        <input type="text" class="form-control" id="synod" placeholder="enter your Synodos" [(ngModel)]="contactnew.synod" name="synod" >
-                      </div>
-                      <div class="form-group col-sm-4">
-                          <label for="cong">Cong</label>
-                          <input type="text" class="form-control" id="cong" placeholder="enter your congregation" [(ngModel)]="contactnew.cong" name="cong" >
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label for="occupation">Occupation</label>
-                            <input type="text" class="form-control" id="occupation" placeholder="enter your occupation" [(ngModel)]="contactnew.occupation" name="occupation" >
-                          </div>
-                </div>
-            <button type="submit" class="btn btn-primary" (click)="editModal.hide()" [disabled] ="!edit.valid">Update Info</button>
+              <label for="resnumber">Residence.NO</label>
+              <input type="text" class="form-control" id="resnumber" placeholder="enter your residence number" [(ngModel)]="contactnew.resnumber" name="resnumber" >
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="pobox">P.O.BOX</label>
+              <input type="text" class="form-control" id="pobox" placeholder="enter your postal number" [(ngModel)]="contactnew.pobox" name="pobox" >
+            </div>
+          </div><!--/.row-->
+          <!--Email And additional inputs-->
+          <div class="form-group">
+            <label for="email">Email Adress</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter email adress name" [(ngModel)]="contactnew.email" name="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <label for="synod">Synod</label>
+              <input type="text" class="form-control" id="synod" placeholder="enter your Synodos" [(ngModel)]="contactnew.synod" name="synod" >
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="cong">Cong</label>
+              <input type="text" class="form-control" id="cong" placeholder="enter your congregation" [(ngModel)]="contactnew.cong" name="cong" >
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="occupation">Occupation</label>
+              <input type="text" class="form-control" id="occupation" placeholder="enter your occupation" [(ngModel)]="contactnew.occupation" name="occupation" >
+            </div>
+          </div>
+            <button type="submit" class="btn btn-primary pull-left" (click)="editModal.hide()" [disabled] ="!edit.valid">Update Info</button>
         </form>
              <button class="btn btn-danger pull-right"  (click)="ondelete(); editModal.hide()">Delete Contact</button>
     <!--<popup  #popup1>-->

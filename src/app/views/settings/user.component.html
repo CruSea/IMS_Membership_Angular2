@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             <tr>
-            <tr *ngFor="let user of users; let i = index ;">
+            <tr *ngFor="let user of this.User_list_paginator.data; let i = index ;">
               <td>{{i +1 }}</td>
               <td>{{user.fullname}} </td>
               <td>{{user.username}}</td>
@@ -33,7 +33,7 @@
               </td>
               <td>{{user.created_at}}</td>
               <td>
-                <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onRemove()"><i class="fa fa-remove"></i>&nbsp;Remove</a></span>
+                <span class="badge badge-danger">    <a  data-toggle="modal" (click)="ondelete(user.id)"><i class="fa fa-remove"></i>&nbsp;Remove</a></span>
                 <span class="badge badge-success">    <a  data-toggle="modal" (click)="editModal.show(); onEditUser(user)"><i class="fa fa-edit"></i>&nbsp;Edit</a></span>
               </td>
             </tr>
@@ -44,14 +44,19 @@
 
 
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="User_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedUser(User_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="User_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedUser(User_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{User_list_paginator.current_page + '/' + User_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="User_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedUser(User_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="User_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedUser(User_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </div>
       </div>

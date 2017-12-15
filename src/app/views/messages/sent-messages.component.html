@@ -19,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let message of contact_message; let i= index">
+            <tr *ngFor="let message of this.Contact_message_list_paginator.data; let i= index">
               <td>{{i +1 }}</td>
               <td>{{message.message}} </td>
               <td>{{message.sent_to}}</td>
@@ -27,7 +27,7 @@
               <td>  {{message.created_at}} </td>
               <td>
 
-                <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onDelete()"><i class="fa fa-remove"></i>&nbsp;Delete</a></span>
+                <span class="badge badge-danger">    <a  data-toggle="modal" (click)=" onDelete(message.id)"><i class="fa fa-remove"></i>&nbsp;Delete</a></span>
               </td>
             </tr>
 
@@ -35,14 +35,19 @@
           </table>
 
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="Contact_message_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Contact_message_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="Contact_message_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Contact_message_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{Contact_message_list_paginator.current_page + '/' + Contact_message_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="Contact_message_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Contact_message_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="Contact_message_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Contact_message_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </div>
       </div>
@@ -61,7 +66,7 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label for="phonenumber" >Phone Number</label>
-                <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber" [(ngModel)]="sent_to" name="sent_to" required>
+                <input type="text" class="form-control" id="phonenumber" placeholder="phonenumber"  [(ngModel)]="sent_to" name="sent_to" required>
               </div>
               <div class="form-group col-sm-12">
                 <label for="message">Message</label>

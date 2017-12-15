@@ -3,8 +3,8 @@ import { HttpHeaders } from '@angular/common/http'
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/Rx';
 import { Group } from 'app/views/contacts/group.interface';
-import {AuthService} from "../../auth.service";
-import {HttpService} from "../../http.service";
+import {AuthService} from '../../auth.service';
+import {HttpService} from '../../http.service';
 @Injectable()
 export class ContactGroupService {
 public myid: Group;

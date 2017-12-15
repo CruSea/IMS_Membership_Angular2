@@ -38,13 +38,14 @@ export class ContactService {
               }
          }
   public getPaginatedContact(request_full_url) {
-    this.http.sendCustomGetRequest(request_full_url).subscribe(
+    const token = this.authservice.getUserToken();
+    this.http.sendCustomGetRequest(request_full_url + '&token=' + token).subscribe(
       data => {this.processGetContactPaginator(data)}
     );
   }
      updateContact(id: number, newcontact: Contact ) {
        const token = this.authservice.getUserToken();
-              return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/Contact-list/' + id + '?token=' + token ,  + newcontact,
+              return this.http.sendPutRequest('Contact-list/' + id + '?token=' + token , newcontact,
               { headers : new HttpHeaders ({'Content-Type': 'application/json' })
               }); }
      deleteContact(id: number) {

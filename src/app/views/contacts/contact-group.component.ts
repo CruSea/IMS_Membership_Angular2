@@ -16,13 +16,13 @@ export class ContactGroupComponent implements OnInit {
              constructor( private contactgroupservice: ContactGroupService ) {}
 // return db groups on page load
      ngOnInit() {
-             this.contactgroupservice.getGroup().subscribe(
+         this.contactgroupservice.getGroup().subscribe(
             grouplist  => { this.groups = grouplist['contactgroup']; },
             (error: Response ) => console.log(error) );
                 }
 // Create new Group
      onSubmit(g: NgForm ) {
-            this.contactgroupservice.addGroup(g.value).subscribe(
+         this.contactgroupservice.addGroup(g.value).subscribe(
             () => alert('Group Created ') );
             // this.onrefresh();
             g.reset();

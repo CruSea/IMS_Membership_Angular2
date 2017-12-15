@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from './services/message.service';
 import {NgForm} from '@angular/forms';
+import {MessagePaginator} from "./mesage.object.mapper";
 
 @Component({
   selector: 'app-sent-messages',
@@ -9,20 +10,29 @@ import {NgForm} from '@angular/forms';
 })
 export class SentMessagesComponent implements OnInit {
   contact_message: any;
+  public Contact_message_list_paginator = new MessagePaginator();
   constructor(private messageservice: MessageService) { }
 
   ngOnInit() {
-     this.messageservice.get_contact_message().subscribe(
-              message =>{this.contact_message = message['messages'] }
-     );
-
-  }
-
-
-  onSendmessage(f: NgForm){
+     this.updateMessagePaginator();
+     this.messageservice.Messagelistpaginator.subscribe(
+      data => { this.Contact_message_list_paginator = data } );
+              }
+  public updateMessagePaginator() {
+    this.messageservice.getContactMessagePaginator();
+              }
+  public onSendmessage(f: NgForm){
         this.messageservice.sendTocontact(f.value ).subscribe(
-          () => alert(" message sent!!! ")
-        );
+          () => {this.updateMessagePaginator()} );
+        f.reset();
+         }
+  public getPaginatedMessage(request_url) {
+    this.messageservice.getPaginatedMessage(request_url);
   }
 
+  public onDelete(message_id: number){
+      this.messageservice.deleteContactMessage(message_id).subscribe(
+        ()=> { this.updateMessagePaginator()}
+      );
+  }
 }

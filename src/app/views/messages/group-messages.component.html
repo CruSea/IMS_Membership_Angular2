@@ -19,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let group_message of group_messages; let i = index;">
+            <tr *ngFor="let group_message of this.Message_list_paginator.data; let i = index;">
               <td>{{i +1 }}</td>
               <td>{{group_message.message}} </td>
               <td>{{group_message.group.groupname}}</td>
@@ -35,14 +35,19 @@
           </table>
 
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li *ngIf="Message_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Message_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="Message_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Message_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+              <a class="page-link" >{{Message_list_paginator.current_page + '/' + Message_list_paginator.last_page}}</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+
+            <li *ngIf="Message_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Message_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="Message_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedMessage(Message_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
           </ul>
         </div>
       </div>
