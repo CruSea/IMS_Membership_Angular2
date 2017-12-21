@@ -26,4 +26,7 @@ export class AppHeader {
       window.localStorage.removeItem('token_auth_key');
       this.router.navigate(['auth/login']);
   }
+  onMessage(){
+    this.router.navigate(['messages/received-messages']);
+  }
 }

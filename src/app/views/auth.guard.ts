@@ -11,18 +11,15 @@ export class AuthGuard implements CanActivate {
   constructor( private authservice: AuthService, private router : Router){}
   canActivate( next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.authservice.getUserLogedIn();
+// if(this.authservice.getUserLogedIn()){
+//   console.log('from auth guard!!', this.authservice.getUserLogedIn());
+//     return true;
+// }
 
-
-    // if( this.authservice.getUserLogedIn()){
-    //   return true;
-    // }else{
-    //
-    //   this.router.navigate(['/']);
-    // }
-
-    // console.log('authgard activaed', this.authservice.getUserLogedIn());
-
-
+  // return this.authservice.autheticate_emiter.subscribe(
+  //      data => console.log(data),
+  //   console.log('from auth ?' , this.authservice.getUserLogedIn())
+  // );
 
   }
 }

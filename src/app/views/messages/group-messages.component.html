@@ -66,17 +66,22 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <label for="groupname">Group Name</label>
-                <select class="form-control" id="group_id" [(ngModel)]="groupname" name="group_id">
+                <select class="form-control" id="group_id" #groupNM="ngModel" [(ngModel)]="groupname" name="group_id" required>
                   <option *ngFor="let group of groups" value="{{group.id}}">{{group.groupname}}</option>
 
 
                 </select>
+                <div *ngIf="!groupNM.valid && groupNM.dirty">
+                  Group Name Required to send message!
+                </div>
               </div>
               <div class="form-group col-sm-12">
                 <label for="message">Message</label>
 
-                  <textarea id="message" name="message" rows="9" cols="6" class="form-control"  [(ngModel)]="message" placeholder="Write Message here..."></textarea>
-
+                  <textarea id="message" name="message"  #Msg="ngModel" rows="9" cols="6" class="form-control"  [(ngModel)]="message" placeholder="Write Message here..." required></textarea>
+                <div *ngIf="!Msg.valid && Msg.dirty">
+                  You Can't send Empty message!
+                </div>
               </div>
               <div class="form-group col-sm-12 ">
                 <button type="submit" class="btn btn-primary pull-right" [disabled]="!send.valid">Send Message</button>

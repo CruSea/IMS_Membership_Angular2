@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    <strong>Password Change</strong> Form
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="change_password(change)" #change="ngForm" method="post">
+      <div class="form-group">
+        <label for="current_password">Current Password</label>
+        <input type="password" id="current_password" #Old="ngModel" name="current_password" [(ngModel)]="current_password" class="form-control" placeholder="Enter current_password.." required>
+        <div *ngIf="!Old.valid && Old.dirty">
+          Old Password Required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="new_password">New Password</label>
+        <input type="password" id="new_password" #new="ngModel" name="new_password"  [(ngModel)]="new_password" class="form-control" placeholder="Enter new_password.." required>
+        <div *ngIf="!new.valid && new.dirty">
+          New Password Required to change your current one!
+        </div>
+      </div>
+      <div class="form-group">
+      <label for="confirm_password">Confirm Password</label>
+      <input type="password" id="confirm_password" #confirm="ngModel" name="confirm_password" [(ngModel)]="confirm_password" class="form-control" placeholder="Confirm your new password.." required>
+        <div *ngIf="!confirm.valid && confirm.dirty">
+          Please Enter your new password again!
+        </div>
+  </div>
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!change.valid"><i class="fa fa-dot-circle-o"></i> Change</button>
+      <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+    </form>
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+

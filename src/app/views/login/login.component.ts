@@ -16,10 +16,11 @@ export class LoginComponent implements OnInit {
 
   onsignIn(form: NgForm) {
        this.authservice.authenticate(form.value.email, form.value.password);
-    this.authservice.autheticate_emiter.subscribe( res => {
+       this.authservice.autheticate_emiter.subscribe( res => {
       if (res) {
         this.router.navigate(['/dashboard']);
-        // console.log('what now?' , this.authservice.getUserLogedIn());
+        console.log(res);
+        // console.log('wfrom login component?' , this.authservice.getUserLogedIn());
 
       }
     } );

@@ -25,9 +25,9 @@ export class UserComponent implements OnInit {
     this.userservice.getUserPaginator();
  }
   onAdduser(form: NgForm) {
-
-        this.userservice.signuUp(form.value).subscribe(
+      this.userservice.signuUp(form.value).subscribe(
           () => { this.updatePagepaginator()} );
+    form.reset();
   }
   activate(activated_user){
     this.users_list= activated_user;

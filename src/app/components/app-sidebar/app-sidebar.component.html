@@ -47,7 +47,7 @@
       <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
         <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-settings"></i> Settings</a>
         <ul class="nav-dropdown-items">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="this.User_list_paginator.data">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/settings/user']"><i class="icon-user"></i>User</a>
           </li>
           <li class="nav-item">

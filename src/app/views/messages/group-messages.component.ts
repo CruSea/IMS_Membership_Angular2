@@ -26,6 +26,7 @@ group_messages:any;
   onSend(form: NgForm){
          this.messageservice.SendToGroup(form.value).subscribe(
            ()=>{this.UpdatePagePaginator()} );
+         form.reset();
   }
   public getPaginatedMessage(request_url) {
     this.messageservice.getPaginatedMessage(request_url);

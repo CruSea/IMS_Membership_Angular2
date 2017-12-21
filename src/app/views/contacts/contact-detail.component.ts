@@ -56,7 +56,7 @@ export class ContactDetailComponent implements OnInit {
  public removeFromgroup(id: number){
     console.log(id);
           this.contactdetailservice.removeContact(id).subscribe(
-            () => { this.UpdatePagePaginator() } );
+            () => { this.UpdatePagePaginator(); this.updatePagesContactList() } );
    }
 
 }

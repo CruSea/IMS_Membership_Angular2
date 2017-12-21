@@ -36,27 +36,23 @@ export class UserService {
               );
             }
 
-
-
-  activateUser(user_id: number, UpdatedUser ){
-    const token = this.authservice.getUserToken();
-    return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/status/' + user_id + '?token=' + token , UpdatedUser,
-        { headers : new HttpHeaders ({'Content-Type': 'application/json' })
+            public activateUser(user_id: number, UpdatedUser ){
+            const token = this.authservice.getUserToken();
+            return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/status/' + user_id + '?token=' + token , UpdatedUser,
+                { headers : new HttpHeaders ({'Content-Type': 'application/json' }) });
+                  }
+          getRole(){
+            const token = this.authservice.getUserToken();
+            return this.http.sendCustomGetRequest('http://localhost/testapp/public/api/role?token=' + token)
+                }
+        updateUser(user_id: number, UpdatedUser: User) {
+          const token = this.authservice.getUserToken();
+           return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/signup/' + user_id + '?token=' + token, UpdatedUser,
+            { headers : new HttpHeaders ({'Content-Type': 'application/json' }) });
         }
-      );
-  }
-  getRole(){
-    const token = this.authservice.getUserToken();
-    return this.http.sendCustomGetRequest('http://localhost/testapp/public/api/role?token=' + token)
-  }
-  updateUser(user_id: number, UpdatedUser: User) {
-    const token = this.authservice.getUserToken();
-     return this.http.sendCustomPutRequest('http://localhost/testapp/public/api/signup/' + user_id + '?token=' + token, UpdatedUser,
-      { headers : new HttpHeaders ({'Content-Type': 'application/json' }) });
-  }
 
-  public deleteUser(id: number){
-    const token = this.authservice.getUserToken();
-    return this.http.sendCustomDeleteRequest('http://localhost/testapp/public/api/signup/' + id + '?token=' + token)
-  }
+        public deleteUser(id: number){
+          const token = this.authservice.getUserToken();
+          return this.http.sendCustomDeleteRequest('http://localhost/testapp/public/api/signup/' + id + '?token=' + token)
+        }
 }
