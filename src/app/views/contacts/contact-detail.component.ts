@@ -7,7 +7,7 @@ import { ContactGroupService } from 'app/views/contacts/services/contact-group.s
 import { ContactDetailService } from 'app/views/contacts/services/contact-detail.service';
 import {AuthService} from "../auth.service";
 import {ContactDetailPaginator} from "./group_members.object.mapper";
-
+import* as swal from 'sweetalert';
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
@@ -23,16 +23,16 @@ export class ContactDetailComponent implements OnInit {
 
   ngOnInit() {
 // Get contacts on page load
-          this.updatePagesContactList();
-          this.contactservice.getContactPaginator();
-          this.contactdetailservice.Contactlistpaginator.subscribe(
-               data => { this.contact_list_paginator = data }
-          );
+      this.updatePagesContactList();
+      this.contactservice.getContactPaginator();
+      this.contactdetailservice.Contactlistpaginator.subscribe(
+           data => { this.contact_list_paginator = data }
+      );
 // Get groups on page load
-            this.UpdatePagePaginator();
-            this.contactdetailservice.Grouplistpaginator.subscribe(
-               data => {this.group_list_paginator = data; } );
-             }
+      this.UpdatePagePaginator();
+      this.contactdetailservice.Grouplistpaginator.subscribe(
+         data => {this.group_list_paginator = data; } );
+       }
   public UpdatePagePaginator(){
     const group_list_id = JSON.parse(localStorage.getItem('current_group_id' ));
     this.contactdetailservice.getGroupDetailPaginator(group_list_id);
@@ -51,12 +51,27 @@ export class ContactDetailComponent implements OnInit {
  public addTogroup( contact_id: number) {
     const group_add_id = JSON.parse(localStorage.getItem('current_group_id' ));
     this.contactdetailservice.addTogroup(group_add_id, contact_id).subscribe(
-      () => { this.UpdatePagePaginator(); this.updatePagesContactList() } );
+      () => { this.UpdatePagePaginator(); this.updatePagesContactList(); swal("Contact Added To Group!", "success"); } );
   }
  public removeFromgroup(id: number){
-    console.log(id);
-          this.contactdetailservice.removeContact(id).subscribe(
-            () => { this.UpdatePagePaginator(); this.updatePagesContactList() } );
+   swal({
+     title: "Are you sure?",
+     text: "Do you really want to remove this contact? think about it again!!",
+     icon: "warning",
+     dangerMode: true,
+   })
+     .then((willDelete) => {
+       if (willDelete) {
+         this.contactdetailservice.removeContact(id).subscribe(
+           () => { this.UpdatePagePaginator(); this.updatePagesContactList() } );
+         swal("Contact has been removed!", {
+           icon: "success",
+         });
+       } else {
+         swal("Your Contact is safe!");
+       }
+     });
+
    }
 
 }

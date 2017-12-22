@@ -16,35 +16,23 @@ export class ContactGroupComponent implements OnInit {
              constructor( private contactgroupservice: ContactGroupService ) {}
 // return db groups on page load
      ngOnInit() {
-         this.contactgroupservice.getGroup().subscribe(
+         this.updateGroupPage();
+            }
+  public updateGroupPage(){
+          this.contactgroupservice.getGroup().subscribe(
             grouplist  => { this.groups = grouplist['contactgroup']; },
             (error: Response ) => console.log(error) );
                 }
 // Create new Group
-     onSubmit(g: NgForm ) {
+   public  onSubmit(g: NgForm ) {
          this.contactgroupservice.addGroup(g.value).subscribe(
-            () => alert('Group Created ') );
-            // this.onrefresh();
+            () =>  {this.updateGroupPage(); swal(' Group Created!', 'success') });
             g.reset();
                          }
-     onDetail(id: number) {
+  public   onDetail(id: number) {
        this.groupnew.id = id;
        localStorage.setItem('current_group_id', JSON.stringify(this.groupnew.id))
-       // console.log( this.groupnew.id);
      }
-
-  // ondelete(id: number) {
-  //   this.groupnew.id = id;
-  //
-  //   this.contactgroupservice.deleteGroup(this.groupnew.id).subscribe(
-  //     () => { alert('Contact Deleted!')} );
-  // }
-// refresh after method excution
-//     onrefresh(){
-//             this.contactgroupservice.getGroup().subscribe(
-//              grouplist  => { this.groups = grouplist['contactgroup'];},
-//              (error: Response ) => console.log(error) );
-//                }
 
 
 

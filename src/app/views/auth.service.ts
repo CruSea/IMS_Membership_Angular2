@@ -36,8 +36,9 @@ export class AuthService {
 
   private authenticate_user(response: any, status) {
            if ( status) {
-                 if (response && response.token) {
+                 if (response && response.token && response.user) {
                       this.storeUserToken(response.token);
+                      this.storeUserInfo(response.user);
                    this.is_authenticated = true;
                       this.login(response);
 
@@ -52,7 +53,9 @@ export class AuthService {
 public storeUserToken( user_token: string ) {
        localStorage.setItem('token_auth_key', user_token);
 }
-
+public storeUserInfo(user_data: string){
+          localStorage.setItem('user', JSON.stringify(user_data) );
+}
 public getUserToken() {
    return localStorage.getItem('token_auth_key');
    // console.log(localStorage.getItem('token_auth_key'))

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from './profile.service';
 import {NgForm} from '@angular/forms';
-
+import* as swal from 'sweetalert';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -15,7 +15,7 @@ export class EditProfileComponent implements OnInit {
 
   public change_password(form: NgForm){
        this.profileservice.change_password(form.value).subscribe(
-         () => alert('password changed')
-       );
+         () => { swal('Password Changed Successfully!', 'success')} );
+       form.reset();
   }
 }

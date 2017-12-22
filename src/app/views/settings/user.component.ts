@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import {User, UserPaginator} from './user.object.mapper';
 import {AuthService} from '../auth.service';
 import {UserService} from "./services/user.service";
+import* as swal from 'sweetalert';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html'
@@ -24,29 +25,49 @@ export class UserComponent implements OnInit {
  public updatePagepaginator(){
     this.userservice.getUserPaginator();
  }
-  onAdduser(form: NgForm) {
+ public onAdduser(form: NgForm) {
       this.userservice.signuUp(form.value).subscribe(
-          () => { this.updatePagepaginator()} );
+          () => { this.updatePagepaginator();  swal("New User Created!", "success");} );
     form.reset();
   }
-  activate(activated_user){
+ public activate(activated_user){
     this.users_list= activated_user;
     this.userservice.activateUser(this.users_list.id, activated_user).subscribe();
   }
-  onEditUser(user){
+  public onEditUser(user){
         this.users_list = user;
   }
-  onUserUpdate() {
+  public onUserUpdate() {
          this.userservice.updateUser(this.users_list.id,this.users_list).subscribe(
-             () => {this.updatePagepaginator()} );
+             () => {this.updatePagepaginator();  swal("User Account updated Successfully!", "success");} );
   }
   public getPaginatedUser(request_full_url){
     this.userservice.getPaginatedUser(request_full_url);
   }
 
   public  ondelete(user_id: number) {
-    this.userservice.deleteUser(user_id).subscribe(
-      () => { this.updatePagepaginator() } );
+
+
+    swal({
+      title: "Are you sure?",
+      text: " you want to delete this user?!",
+      icon: "warning",
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+           this.userservice.deleteUser(user_id).subscribe(
+            () => { this.updatePagepaginator() } );
+          swal("User has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your message is safe!");
+        }
+      });
+
+
+
 
   }
 }

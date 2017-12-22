@@ -6,11 +6,13 @@ import {Router} from '@angular/router';
   templateUrl: './app-header.component.html'
 })
 export class AppHeader {
-
+public user: any;
   constructor(private el: ElementRef, private router: Router) { }
 
   //wait for the component to render completely
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user'));
+      console.log(this.user.fullname);
     var nativeElement: HTMLElement = this.el.nativeElement,
     parentElement: HTMLElement = nativeElement.parentElement;
     // move all children out of the element

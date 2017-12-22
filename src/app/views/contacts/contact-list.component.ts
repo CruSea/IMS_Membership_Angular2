@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ContactService } from 'app/views/contacts/services/contact.service';
 import { Contact, ContactsPaginator  } from './contact.object.mapper';
-
+import* as swal from 'sweetalert';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styles: [`
-       input.ng-invalid.ng-dirty{
-            border: 1px solid red;
-       }
+    input.ng-invalid.ng-dirty {
+      border: 1px solid #ff0f55;
+    }
   `]
 })
 export class ContactListComponent implements OnInit {
@@ -50,7 +50,7 @@ export class ContactListComponent implements OnInit {
   //   }
   // }
   // pre-populate existing data on edit button
-         onedit(contacts) {
+       public  onedit(contacts) {
                      this.contactnew = contacts;
                           }
 // update contact information
@@ -58,30 +58,28 @@ export class ContactListComponent implements OnInit {
      console.log(this.contactnew.id, this.contactnew);
                 this.contactservice.updateContact(this.contactnew.id, this.contactnew).subscribe(
                     () => { this.UpdatepagePaginator();});
-                        // this.contacts = this.contactnew;
+                    swal(" Contact Updated!", "success");
                                   }
 // delete contact information
-      public  ondelete(contacts) {
-               this.contactservice.deleteContact(this.contactnew.id).subscribe(
-                       () => { this.UpdatepagePaginator() } );
-
-                    }
-
-              // onremoved(contactnew: Contact){
-              //         const postion = this.contactnew.
-
-                      //   (contactEl: Contact) => {
-                      //      return contactEl.id == contactnew.id;
-                      //   }
-                      // );
-
-              // }
-
-// onedit(contacts) {
-//     this.contactnew = contacts;
-//     console.log(contacts);
-//
-//  }
+  public  ondelete(contacts) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Contact!",
+      icon: "warning",
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.contactservice.deleteContact(this.contactnew.id).subscribe(
+            () => { this.UpdatepagePaginator() } );
+          swal("Contact has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your Contact is safe!");
+        }
+      });
+  }
 
 
 }
