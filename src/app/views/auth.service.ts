@@ -39,12 +39,14 @@ export class AuthService {
                  if (response && response.token && response.user) {
                       this.storeUserToken(response.token);
                       this.storeUserInfo(response.user);
-                   this.is_authenticated = true;
+                    this.is_authenticated = true;
                       this.login(response);
+                 } else{
+                   this.is_authenticated = false;
 
-
-                 }
+                  }
            }
+
   }
       public getUserLogedIn(){
         return this.is_authenticated;

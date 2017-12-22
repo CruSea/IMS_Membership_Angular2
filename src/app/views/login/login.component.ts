@@ -4,25 +4,32 @@ import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styles: [`
+    input.ng-invalid.ng-dirty {
+      border: 1px solid #ff0f55;
+    }
+  `]
 })
 export class LoginComponent implements OnInit {
-   isauthenticated: boolean;
+   public isauthenticated: boolean;
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
 
-  onsignIn(form: NgForm) {
+  public onsignIn(form: NgForm) {
        this.authservice.authenticate(form.value.email, form.value.password);
        this.authservice.autheticate_emiter.subscribe( res => {
-      if (res) {
-        this.router.navigate(['/dashboard']);
-        console.log(res);
-        // console.log('wfrom login component?' , this.authservice.getUserLogedIn());
+         this.isauthenticated = res;
+         console.log(this.isauthenticated);
+         if(this.isauthenticated){
+           this.router.navigate(['/dashboard']);
+         }else{
+             this.isauthenticated = false;
+         }
 
-      }
     } );
 
 

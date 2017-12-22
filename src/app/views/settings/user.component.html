@@ -94,10 +94,10 @@
       </div>
       <div class="form-group col-sm-12">
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" placeholder="email" [(ngModel)]="email" name="email" required>
+        <input type="text" class="form-control" id="email" #em="ngModel" placeholder="email" [(ngModel)]="email" name="email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
       </div>
       <div class="form-group col-sm-12">
-        <label for="user_privilage">User Privilage</label>
+        <label for="role_id">User Privilage</label>
         <select class="form-control" id="role_id" [(ngModel)]="role_id" name="role_id">
           <option  *ngFor="let roles of role" value="{{roles.id}}">{{roles.role_name}}</option>
           <!--<option value="2">Owner</option>-->
@@ -107,6 +107,7 @@
       </div>
       <div class="form-group col-sm-12 ">
         <button type="submit" class="btn btn-primary pull-right" [disabled]="!add.valid">Save User</button>
+        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
       </div>
 
     </div>
